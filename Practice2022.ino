@@ -9,10 +9,11 @@
 #define BTN_LV3 19
 #define BTN_LV2 20
 #define BTN_LV1 21
+#define llength 10;
 
 bool isRunning = false;
 bool isGainedWeight = false;
-int level_list[10];
+int level_list[llength];
 int spid = 120;
 var direction "None";
 int levelsToGo = 0; //Если не 1, а больше, то после срабатывания датчика едем в этом же направлении еще этаж.
@@ -36,16 +37,20 @@ void loop() {
     switch(direction){
       case "Up":
       while(levlsToGo > 0){
-    analogWrite(MX1508_O1,LOW);  //ехаем вперед
+    analogWrite(MX1508_O1,LOW);  //ехаем вверх
     analogWrite(MX1508_O2 ,spid); 
         
       }
       break;
       case "Down":
-      
+      while(levlsToGo > 0){
+    analogWrite(MX1508_O2,LOW);  //ехаем вниз
+    analogWrite(MX1508_O1 ,spid); 
+        
+      }
       break;
       default:
-
+      //вот этого быть не должно
       break;
     }
   }
@@ -78,7 +83,16 @@ digitalWrite(PIN_LED, actionState);
 }
 
 void addToList(int newLevelTask){
+  //туду
+  level_list[arrayLevel] = newLevelTask;
+  arrayLevel++
+  if(arrayLevel >= llength){
+    arrayLevel=0;
+  }
   
 }
-
+void compare(){
+  //модуль разницы предыдущего и текущего этажа
+  //
+}
   
