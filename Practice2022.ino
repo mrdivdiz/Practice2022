@@ -92,7 +92,30 @@ void addToList(int newLevelTask){
   
 }
 void compare(){
+  
   //модуль разницы предыдущего и текущего этажа
   //
 }
-  
+
+void addToListShift(int newLevelTask){//добовляем элемент
+  int counter = 0;
+  bool addFlag = false;
+  while(counter < llength && !addFlag){
+    if(level_list[counter] == -1){
+      level_list[counter] = newLevelTask;
+      addFlag = true; 
+    }
+  }
+  if(!addFlag){
+    removeToListShift();
+    level_list[llength -1] = newLevelTask;
+  }
+}
+void removeToListShift(){//удаляем первый элемент
+  int counter =0;
+  while(counter < llength){
+    counter++;
+    level_list[counter -1]=level_list[counter];
+    level_list[counter] = -1;
+    }
+}
