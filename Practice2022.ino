@@ -25,6 +25,10 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(MX1508_O1, OUTPUT);    // Устанавливаем MX1508_O1 как выход
   pinMode(MX1508_O2, OUTPUT);    // Устанавливаем MX1508_O2 как выход
+  pinMode(GERC_DETECT, INPUT);
+  pinMode(BTN_LV3, INPUT);
+  pinMode(BTN_LV2, INPUT);
+  pinMode(BTN_LV1, INPUT);
   attachInterrupt(2, when_BTN_LV1, HIGH);
   attachInterrupt(3, when_BTN_LV2, HIGH);
   attachInterrupt(4, when_BTN_LV3, HIGH);
