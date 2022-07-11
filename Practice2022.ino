@@ -6,9 +6,9 @@
 #define MX1508_O2 6
 #define PIN_WEIGHT 5
 #define GERC_DETECT 18
-#define BTN_LV3 19
-#define BTN_LV2 20
-#define BTN_LV1 21
+#define BTN_LV3 13
+#define BTN_LV2 12
+#define BTN_LV1 11
 #define llength 10
 
 bool isRunning = false;
@@ -27,12 +27,14 @@ void setup() {
   pinMode(MX1508_O2, OUTPUT);    // Устанавливаем MX1508_O2 как выход
   pinMode(GERC_DETECT, INPUT);
   pinMode(BTN_LV3, INPUT);
-  pinMode(BTN_LV2, INPUT);
+  pinMode(BTN_LV2, INPUT);//Вводы кнопок
   pinMode(BTN_LV1, INPUT);
-  attachInterrupt(2, when_BTN_LV1, HIGH);
-  attachInterrupt(3, when_BTN_LV2, HIGH);
-  attachInterrupt(4, when_BTN_LV3, HIGH);
-  attachInterrupt(5, when_GERC_DETECT, HIGH);
+  //attachInterrupt(2, when_BTN_LV1, HIGH);
+  //attachInterrupt(3, when_BTN_LV2, HIGH);
+  //attachInterrupt(4, when_BTN_LV3, HIGH);
+  //attachInterrupt(5, when_GERC_DETECT, HIGH);
+  attachInterrupt(0, when_GERC_DETECT, HIGH);//Прерывание на геркониевый датчик
+  attachInterrupt(1, btn_sel, HIGH);//Общее прерывание на выбор кнопок.
   Serial.begin(9600);
   Serial.println("Setup finished.");
   Serial.println(" ");
@@ -62,6 +64,18 @@ void loop() {
       delay(500);
       break;
     }
+  }
+}
+
+void btn_sel(){
+  if(BTN_LV3==HIGH){
+    when_BTN_LV3();
+  }
+  if(BTN_LV2==HIGH){
+    when_BTN_LV2();
+  }
+  if(BTN_LV1==HIGH){
+    when_BTN_LV1();
   }
 }
 
